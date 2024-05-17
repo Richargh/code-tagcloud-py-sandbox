@@ -15,9 +15,9 @@ class ExtractKotlinTagsTest(unittest.TestCase):
         value class AuthorId(val rawValue: String)
         """
         # when
-        result = extract_code_tags(self.lexer, all_cloud(), source_code)
+        result = extract_code_tags(self.lexer, all_cloud(), set(), source_code)
         # then
-        self.assertEqual(["AuthorId", "rawValue", "String"], result)
+        self.assertEqual(["AuthorId", "RawValue", "String"], result)
 
     def test_extracts_kotlin_value_class_names(self):
         # given
@@ -25,7 +25,7 @@ class ExtractKotlinTagsTest(unittest.TestCase):
         value class AuthorId(val rawValue: String)
         """
         # when
-        result = extract_code_tags(self.lexer, name_cloud(), source_code)
+        result = extract_code_tags(self.lexer, name_cloud(), set(), source_code)
         # then
         # TODO kotlin-related pygments bug, rawValue is a Variable and String is suddenly a type
         self.assertEqual([], result)
@@ -36,7 +36,7 @@ class ExtractKotlinTagsTest(unittest.TestCase):
         value class AuthorId(val rawValue: String)
         """
         # when
-        result = extract_code_tags(self.lexer, type_cloud(), source_code)
+        result = extract_code_tags(self.lexer, type_cloud(), set(), source_code)
         # then
         self.assertEqual(["AuthorId"], result)
 
@@ -46,7 +46,7 @@ class ExtractKotlinTagsTest(unittest.TestCase):
         data class AuthorId(val rawValue: String)
         """
         # when
-        result = extract_code_tags(self.lexer, name_cloud(), source_code)
+        result = extract_code_tags(self.lexer, name_cloud(), set(), source_code)
         # then
         # TODO kotlin-related pygments bug, rawValue is a Variable and String is suddenly a type
         self.assertEqual([], result)
@@ -57,7 +57,7 @@ class ExtractKotlinTagsTest(unittest.TestCase):
         value class AuthorId(val rawValue: String)
         """
         # when
-        result = extract_code_tags(self.lexer, type_cloud(), source_code)
+        result = extract_code_tags(self.lexer, type_cloud(), set(), source_code)
         # then
         self.assertEqual(["AuthorId"], result)
 
@@ -69,6 +69,6 @@ class ExtractKotlinTagsTest(unittest.TestCase):
         }
         """
         # when
-        result = extract_code_tags(self.lexer, behavior_cloud(), source_code)
+        result = extract_code_tags(self.lexer, behavior_cloud(), set(), source_code)
         # then
-        self.assertEqual(["greet"], result)
+        self.assertEqual(["Greet"], result)

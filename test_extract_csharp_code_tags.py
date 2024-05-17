@@ -15,10 +15,10 @@ class ExtractCsharpTagsTest(unittest.TestCase):
         public record AuthorId(string RawValue);
         """
         # when
-        result = extract_code_tags(self.lexer, name_cloud(), source_code)
+        result = extract_code_tags(self.lexer, name_cloud(), set(), source_code)
         # then
         # TODO record-related pygments bug
-        self.assertEqual(["record", "RawValue"], result)
+        self.assertEqual(["Record", "RawValue"], result)
 
     def test_extracts_csharp_record_types(self):
         # given
@@ -26,7 +26,7 @@ class ExtractCsharpTagsTest(unittest.TestCase):
         public record AuthorId(string RawValue);
         """
         # when
-        result = extract_code_tags(self.lexer, type_cloud(), source_code)
+        result = extract_code_tags(self.lexer, type_cloud(), set(), source_code)
         # then
         # TODO record-related pygments bug, AuthorId considered a function
         self.assertEqual([], result)
@@ -40,7 +40,7 @@ class ExtractCsharpTagsTest(unittest.TestCase):
         }
         """
         # when
-        result = extract_code_tags(self.lexer, behavior_cloud(), source_code)
+        result = extract_code_tags(self.lexer, behavior_cloud(), set(), source_code)
         # then
         self.assertEqual(["Author", "Greet"], result)
 
@@ -62,7 +62,7 @@ class ExtractCsharpTagsTest(unittest.TestCase):
         }
         """
         # when
-        result = extract_code_tags(self.lexer, behavior_cloud(), source_code)
+        result = extract_code_tags(self.lexer, behavior_cloud(), set(), source_code)
         # then
         self.assertEqual(["Author", "Greet"], result)
 
@@ -88,7 +88,7 @@ class ExtractCsharpTagsTest(unittest.TestCase):
         }
         """
         # when
-        result = extract_code_tags(self.lexer, behavior_cloud(), source_code)
+        result = extract_code_tags(self.lexer, behavior_cloud(), set(), source_code)
         # then
         # (constructors are also functions, fields are arguments)
         self.assertEqual(["Rent"], result)

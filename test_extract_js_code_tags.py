@@ -17,9 +17,9 @@ class ExtractJavascriptTagsTest(unittest.TestCase):
         };
         """
         # when
-        result = extract_code_tags(self.lexer, name_cloud(), source_code)
+        result = extract_code_tags(self.lexer, name_cloud(), set(), source_code)
         # then
-        self.assertEqual(["authorId", "rawValue"], result)
+        self.assertEqual(["AuthorId", "RawValue"], result)
 
     def test_extracts_js_object_shorthand_names(self):
         # given
@@ -29,9 +29,9 @@ class ExtractJavascriptTagsTest(unittest.TestCase):
         };
         """
         # when
-        result = extract_code_tags(self.lexer, name_cloud(), source_code)
+        result = extract_code_tags(self.lexer, name_cloud(), set(), source_code)
         # then
-        self.assertEqual(["authorId", "rawValue"], result)
+        self.assertEqual(["AuthorId", "RawValue"], result)
 
     def test_extracts_js_class_names(self):
         # given
@@ -43,9 +43,9 @@ class ExtractJavascriptTagsTest(unittest.TestCase):
         }
         """
         # when
-        result = extract_code_tags(self.lexer, name_cloud(), source_code)
+        result = extract_code_tags(self.lexer, name_cloud(), set(), source_code)
         # then
-        expected = ["AuthorId", "rawValue", "rawValue", "rawValue"]
+        expected = ["AuthorId", "RawValue", "RawValue", "RawValue"]
         self.assertEqual(expected, result)
 
     def test_extracts_js_class_function_behavior(self):
@@ -64,7 +64,7 @@ class ExtractJavascriptTagsTest(unittest.TestCase):
         }
         """
         # when
-        result = extract_code_tags(self.lexer, behavior_cloud(), source_code)
+        result = extract_code_tags(self.lexer, behavior_cloud(), set(), source_code)
         # then
         # TODO js-related pygments bug, function name considered Name.Other
         self.assertEqual([], result)
@@ -83,7 +83,7 @@ class ExtractJavascriptTagsTest(unittest.TestCase):
         }
         """
         # when
-        result = extract_code_tags(self.lexer, behavior_cloud(), source_code)
+        result = extract_code_tags(self.lexer, behavior_cloud(), set(), source_code)
         # then
         # TODO js-related pygments bug, function name considered Name.Other
         self.assertEqual([], result)

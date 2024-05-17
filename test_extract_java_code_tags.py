@@ -15,9 +15,9 @@ class ExtractJavaTagsTest(unittest.TestCase):
         public record AuthorId(String rawValue){ }
         """
         # when
-        result = extract_code_tags(self.lexer, all_cloud(), source_code)
+        result = extract_code_tags(self.lexer, all_cloud(), set(), source_code)
         # then
-        self.assertEqual(["AuthorId", "String", "rawValue"], result)
+        self.assertEqual(["AuthorId", "String", "RawValue"], result)
 
     def test_extracts_java_record_names(self):
         # given
@@ -25,9 +25,9 @@ class ExtractJavaTagsTest(unittest.TestCase):
         public record AuthorId(String rawValue){ }
         """
         # when
-        result = extract_code_tags(self.lexer, name_cloud(), source_code)
+        result = extract_code_tags(self.lexer, name_cloud(), set(), source_code)
         # then
-        self.assertEqual(["String", "rawValue"], result)
+        self.assertEqual(["String", "RawValue"], result)
 
     def test_extracts_java_record_types(self):
         # given
@@ -35,7 +35,7 @@ class ExtractJavaTagsTest(unittest.TestCase):
         public record AuthorId(String rawValue){ }
         """
         # when
-        result = extract_code_tags(self.lexer, type_cloud(), source_code)
+        result = extract_code_tags(self.lexer, type_cloud(), set(), source_code)
         # then
         self.assertEqual(["AuthorId"], result)
 
@@ -49,9 +49,9 @@ class ExtractJavaTagsTest(unittest.TestCase):
         }
         """
         # when
-        result = extract_code_tags(self.lexer, behavior_cloud(), source_code)
+        result = extract_code_tags(self.lexer, behavior_cloud(), set(), source_code)
         # then
-        self.assertEqual(["greet"], result)
+        self.assertEqual(["Greet"], result)
 
     def test_extracts_java_class_behavior(self):
         # given
@@ -73,10 +73,10 @@ class ExtractJavaTagsTest(unittest.TestCase):
         }
         """
         # when
-        result = extract_code_tags(self.lexer, behavior_cloud(), source_code)
+        result = extract_code_tags(self.lexer, behavior_cloud(), set(), source_code)
         # then
         # (constructors are also functions, fields are arguments)
-        self.assertCountEqual(["Author", "id", "name", "greet"], result)
+        self.assertEqual(["Author", "Id", "Name", "Greet"], result)
 
     def test_extracts_java_class_behavior_invocation(self):
         # given
@@ -100,8 +100,8 @@ class ExtractJavaTagsTest(unittest.TestCase):
         }
         """
         # when
-        result = extract_code_tags(self.lexer, behavior_cloud(), source_code)
+        result = extract_code_tags(self.lexer, behavior_cloud(), set(), source_code)
         # then
         # (constructors are also functions, fields are arguments)
-        expected = ["rent", "containsKey", "empty", "remove", "put", "of"]
+        expected = ["Rent", "ContainsKey", "Empty", "Remove", "Put", "Of"]
         self.assertEqual(expected, result)

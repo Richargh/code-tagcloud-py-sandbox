@@ -17,9 +17,9 @@ class ExtractTypeScriptTagsTest(unittest.TestCase):
         };
         """
         # when
-        result = extract_code_tags(self.lexer, name_cloud(), source_code)
+        result = extract_code_tags(self.lexer, name_cloud(), set(), source_code)
         # then
-        self.assertEqual(["authorId", "rawValue"], result)
+        self.assertEqual(["AuthorId", "RawValue"], result)
 
     def test_extracts_ts_object_shorthand_names(self):
         # given
@@ -29,9 +29,9 @@ class ExtractTypeScriptTagsTest(unittest.TestCase):
         };
         """
         # when
-        result = extract_code_tags(self.lexer, name_cloud(), source_code)
+        result = extract_code_tags(self.lexer, name_cloud(), set(), source_code)
         # then
-        self.assertEqual(["authorId", "rawValue"], result)
+        self.assertEqual(["AuthorId", "RawValue"], result)
 
     def test_extracts_ts_class_names(self):
         # given
@@ -42,9 +42,9 @@ class ExtractTypeScriptTagsTest(unittest.TestCase):
         }
         """
         # when
-        result = extract_code_tags(self.lexer, name_cloud(), source_code)
+        result = extract_code_tags(self.lexer, name_cloud(), set(), source_code)
         # then
-        expected = ["AuthorId", "rawValue"]
+        expected = ["AuthorId", "RawValue"]
         self.assertEqual(expected, result)
 
     def test_extracts_ts_class_function_behavior(self):
@@ -61,7 +61,7 @@ class ExtractTypeScriptTagsTest(unittest.TestCase):
         }
         """
         # when
-        result = extract_code_tags(self.lexer, behavior_cloud(), source_code)
+        result = extract_code_tags(self.lexer, behavior_cloud(), set(), source_code)
         # then
         self.assertEqual([], result)
 
@@ -77,7 +77,7 @@ class ExtractTypeScriptTagsTest(unittest.TestCase):
         }
         """
         # when
-        result = extract_code_tags(self.lexer, behavior_cloud(), source_code)
+        result = extract_code_tags(self.lexer, behavior_cloud(), set(), source_code)
         # then
         # TODO record-related pygments bug, function name considered Name.Other
         self.assertEqual([], result)
