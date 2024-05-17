@@ -36,6 +36,12 @@ Make sure all required dependencies are installed:
 ** Drill-downs with "behavior" or "type" seem to work way better in Java than in other languages.
 . Run tests with `python -m unittest discover`.
 
+=== Other repositories to tag cloud
+
+* link:https://github.com/spring-projects/spring-petclinic[Spring Petclinic]
+* link:https://github.com/gothinkster/realworld[Real World]
+* link:https://github.com/innoq/roca-airways[ROCA Airways]
+
 == Pyenv vs Virtual Environment
 
 * `pyenv` manages multiple versions of Python itself.
