@@ -51,6 +51,8 @@ Make sure all required dependencies are installed:
 
 . `pip install wordcloud`
 . `pip install pygments`
+. `pip install progressbar2`
+. `pip install yaspin`
 . `pip freeze > requirements.txt`
 
 == Acknowledgements

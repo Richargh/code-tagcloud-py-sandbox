@@ -1,12 +1,15 @@
 import glob
+import os.path
+
 from pygments.token import Token
+import progressbar
 
 
 def extract_folder_tags(folder: str, glob_pattern: str, extractor) -> list[str]:
     result = []
 
     file_paths = glob.glob(folder + glob_pattern, recursive=True)
-    for file_path in file_paths:
+    for file_path in progressbar.progressbar(file_paths):
         tags = extract_file_tags(file_path, extractor)
         if len(tags) > 0:
             result.extend(tags)
@@ -17,9 +20,10 @@ def extract_folder_tags(folder: str, glob_pattern: str, extractor) -> list[str]:
 def extract_file_tags(file_path, extractor):
     result = []
     # print(f"{file_path}")
-    with open(file_path) as source_code_file:
-        source_code = source_code_file.read()
-        result.extend(extractor(source_code))
+    if os.path.isfile(file_path):
+        with open(file_path) as source_code_file:
+            source_code = source_code_file.read()
+            result.extend(extractor(source_code))
 
     return result
 
