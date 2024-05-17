@@ -1,5 +1,12 @@
-= Code Word Cloud (Sandbox)
+= Code Tag Cloud (Sandbox)
 
+== Features
+
+* Python script that can generate word clouds from code. Implemented languages are:
+** Java
+** Kotlin
+** C#
+** TS/JS
 
 == Prerequisites
 
@@ -25,6 +32,8 @@ Make sure all required dependencies are installed:
 == Usage
 
 . Run the code with `./main.py samples/renting-java java all`
+** Note that "all" seems to be the best option for now.
+** Drill-downs with "behavior" or "type" seem to work way better in Java than in other languages.
 . Run tests with `python -m unittest discover`.
 
 == Pyenv vs Virtual Environment
