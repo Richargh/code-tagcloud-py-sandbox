@@ -5,7 +5,11 @@ import matplotlib.pyplot as plt
 def draw_tag_cloud(tags, show: bool):
     # lower max_font_size
     # wordcloud = WordCloud(max_font_size=40).generate(text)
-    wordcloud = WordCloud().generate(" ".join(tags))
+    wordcloud = WordCloud(
+        width=1920,
+        height=1080,
+        collocations=False
+    ).generate(" ".join(tags))
     plt.figure()
     plt.imshow(wordcloud, interpolation="bilinear")
     plt.axis("off")
