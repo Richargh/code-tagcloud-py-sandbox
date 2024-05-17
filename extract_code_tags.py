@@ -1,0 +1,33 @@
+import glob
+from pygments.token import Token
+
+
+def extract_folder_tags(folder: str, glob_pattern, extractor) -> list[str]:
+    result = []
+
+    file_paths = glob.glob(folder + glob_pattern, recursive=True)
+    for file_path in file_paths:
+        tags = extract_file_tags(file_path, extractor)
+        if len(tags) > 0:
+            result.extend(tags)
+
+    return result
+
+
+def extract_file_tags(file_path, extractor):
+    result = []
+    # print(f"{file_path}")
+    with open(file_path) as source_code_file:
+        source_code = source_code_file.read()
+        result.extend(extractor(source_code))
+
+    return result
+
+
+def extract_code_tags(lexer, relevant_tokens: list[Token], source_code: str) -> list[str]:
+    result = []
+    for token_type, tokens in lexer.get_tokens(source_code):
+        # print(f"  [{token_type}] {tokens}")
+        if token_type in relevant_tokens:
+            result.append(tokens)
+    return result

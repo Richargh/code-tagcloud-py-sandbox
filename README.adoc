@@ -24,7 +24,7 @@ Make sure all required dependencies are installed:
 
 == Usage
 
-. Run the code with `python app.py`
+. Run the code with `./main.py samples/renting-java java all`
 . Run tests with `python -m unittest discover`.
 
 == Pyenv vs Virtual Environment
@@ -35,9 +35,11 @@ Make sure all required dependencies are installed:
 == Created via
 
 . `pip install wordcloud`
+. `pip install pygments`
 . `pip freeze > requirements.txt`
 
 == Acknowledgements
 
 * link:https://www.feststelltaste.de/word-cloud-computing/[
-Word Cloud Computing]
+Word Cloud Computing] did almost all the heavy lifting
+
